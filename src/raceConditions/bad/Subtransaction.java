@@ -7,7 +7,6 @@ class Subtransaction {
     private final CharSequence tag;
 
     private Account account;
-    private Account toAccount;
     private int amount;
 
     Subtransaction(int amount, Account account) {
