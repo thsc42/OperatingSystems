@@ -25,4 +25,8 @@ public abstract class SyncVariant implements SyncThreads {
             LogHelper.printThreadLog("thread woke up");
         }
     }
+
+    protected void interruptThread(Thread thread) {
+        thread.interrupt();
+    }
 }

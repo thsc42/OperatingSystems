@@ -47,7 +47,7 @@ public class Semaphore extends SyncVariant {
         this.up();
         if(!this.waitingThread.isEmpty()) {
             Thread firstThread = this.waitingThread.remove(0);
-            firstThread.interrupt(); // wake up
+            this.interruptThread(firstThread);
         }
     }
 }

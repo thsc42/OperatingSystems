@@ -1,10 +1,16 @@
 package raceConditions;
 
-public class CriticalSectionMutex implements Runnable {
+/**
+ * Bring data and methods into a single construct and declare single (process) thread usage only.
+ * That is the idea of a monitor (around 1975 Hoare).
+ *
+ * That is OO and synchronized in this century.
+ *
+ */
+public class CriticalSectionMonitor implements Runnable {
     private long sharedNumber;
     public static final long SLEEP_IN_MILLIS = 500;
 
-    /** Synchronized is already a mutex */
     synchronized void criticalSection() {
         long threadID = Thread.currentThread().getId();
         System.out.println("thread entered critical section: " + threadID);

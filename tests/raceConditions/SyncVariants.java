@@ -1,7 +1,6 @@
 package raceConditions;
 
 import org.junit.Test;
-import raceConditions.*;
 
 public class SyncVariants {
     public Thread[] setUpThread(SyncThreads mutex, int number) {
@@ -50,16 +49,6 @@ public class SyncVariants {
     }
 
     @Test
-    public void semaphore() throws InterruptedException {
-        System.out.println("semaphore");
-        SyncThreads syncer = new Semaphore(3); // one syncer only
-        Thread[] parallelThreads = this.setUpThread(syncer, 10);
-        this.launchThreads(parallelThreads, false); // thanks to synchronized no more race conditions
-        Thread.sleep(3000);
-    }
-
-
-    @Test
     public void sequencer() throws InterruptedException {
         System.out.println("sequencer");
         SyncThreads syncer = new Sequencer(); // one syncer only
@@ -69,29 +58,49 @@ public class SyncVariants {
     }
 
     @Test
-    public void mutexWhyWrongCode() throws InterruptedException {
+    public void semaphore() throws InterruptedException {
+        System.out.println("semaphore with sleep / interrupt");
+        SyncThreads syncer = new Semaphore(3); // one syncer only
+        Thread[] parallelThreads = this.setUpThread(syncer, 10);
+        this.launchThreads(parallelThreads, false); // thanks to synchronized no more race conditions
+        Thread.sleep(3000);
+    }
+
+    @Test
+    public void binarySemaphoreAsMonitor() throws InterruptedException {
+        System.out.println("binary semaphore as monitor (wait / notify)");
+        Monitor monitor = new Monitor();
+        Thread one = new Thread(monitor);
+        Thread two = new Thread(monitor);
+        one.start();
+        two.start();
+        Thread.sleep(2000);
+    }
+
+    @Test
+    public void monitor() throws InterruptedException {
         int number = 10;
-        System.out.println("bad mutex");
+        System.out.println("monitor");
+        CriticalSectionMonitor example = new CriticalSectionMonitor();
         Thread parallelThreads[] = new Thread[number];
         for(int i = 0; i < number; i++) {
-            CriticalSectionMutex example = new CriticalSectionMutex();
+            parallelThreads[i] = new Thread(example); // create a thread that will run example's code
+        }
+        this.launchThreads(parallelThreads, false);
+        Thread.sleep(3000);
+    }
+
+    @Test
+    public void monitorWhyWrongCode() throws InterruptedException {
+        int number = 10;
+        System.out.println("bad monitor");
+        Thread parallelThreads[] = new Thread[number];
+        for(int i = 0; i < number; i++) {
+            CriticalSectionMonitor example = new CriticalSectionMonitor();
             parallelThreads[i] = new Thread(example); // create a thread that will run example's code
         }
         this.launchThreads(parallelThreads, false);
         Thread.sleep(3000);
         System.err.println("all threads entered critical section simultaneously. Why?");
-    }
-
-    @Test
-    public void mutex() throws InterruptedException {
-        int number = 10;
-        System.out.println("mutex");
-        CriticalSectionMutex example = new CriticalSectionMutex();
-        Thread parallelThreads[] = new Thread[number];
-        for(int i = 0; i < number; i++) {
-            parallelThreads[i] = new Thread(example); // create a thread that will run example's code
-        }
-        this.launchThreads(parallelThreads, false);
-        Thread.sleep(3000);
     }
 }
