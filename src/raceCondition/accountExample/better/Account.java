@@ -1,4 +1,4 @@
-package raceCondition.better;
+package raceCondition.accountExample.better;
 
 class Account {
     private final CharSequence owner;
@@ -10,7 +10,7 @@ class Account {
 
     CharSequence getOwner() { return this.owner; }
 
-    // synchronized (not really necessary with a single line of code - doesn't hurt anyway
+    // synchronized (not really necessary with a single line of code - doesn't hurt anyway)
     synchronized void add(int amount) {
         this.balance += amount;
     }

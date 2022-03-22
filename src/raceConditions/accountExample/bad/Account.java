@@ -1,4 +1,4 @@
-package raceConditions.bad;
+package raceConditions.accountExample.bad;
 
 class Account {
     private final CharSequence owner;

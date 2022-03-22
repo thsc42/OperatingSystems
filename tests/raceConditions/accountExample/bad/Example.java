@@ -1,6 +1,8 @@
-package raceConditions.bad;
+package raceConditions.accountExample.bad;
 
 import org.junit.Test;
+import raceConditions.accountExample.bad.Account;
+import raceConditions.accountExample.bad.Subtransaction;
 
 public class Example {
     public static final CharSequence ALICE = "Alice";

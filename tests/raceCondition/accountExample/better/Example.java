@@ -1,4 +1,4 @@
-package raceCondition.better;
+package raceCondition.accountExample.better;
 import org.junit.Test;
 
 public class Example {

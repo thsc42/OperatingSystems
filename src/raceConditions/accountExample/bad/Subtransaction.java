@@ -1,4 +1,4 @@
-package raceConditions.bad;
+package raceConditions.accountExample.bad;
 
 class Subtransaction {
     public static final long SLEEP_IN_MILLIS = 200;
