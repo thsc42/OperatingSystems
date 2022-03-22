@@ -1,5 +1,7 @@
 package raceConditions;
 
+import utils.LogHelper;
+
 public class CriticalSectionExample implements Runnable {
     private final SyncThreads sync;
     private long sharedNumber;
@@ -11,7 +13,7 @@ public class CriticalSectionExample implements Runnable {
 
     void criticalSection() {
         long threadID = Thread.currentThread().getId();
-        System.out.println("thread entered critical section: " + threadID);
+        LogHelper.printThreadLog("thread entered critical section");
 
         // do something
         this.sharedNumber = threadID; // access shared value - critical thing!!
@@ -20,10 +22,10 @@ public class CriticalSectionExample implements Runnable {
         try {
             Thread.sleep(SLEEP_IN_MILLIS);
         } catch (InterruptedException e) {
-            System.out.println("sleep was interrupted: " + Thread.currentThread().getId());
+            LogHelper.printThreadLog("sleep interrupted (not planned in this example");
         }
 
-        System.out.println("thread is leaving critical section: " + threadID);
+        LogHelper.printThreadLog("thread is leaving critical section");
     }
 
     @Override

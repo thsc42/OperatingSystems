@@ -51,17 +51,27 @@ public class SyncVariants {
 
     @Test
     public void semaphore() throws InterruptedException {
-        System.out.println("sleep / wakeup");
+        System.out.println("semaphore");
         SyncThreads syncer = new Semaphore(3); // one syncer only
         Thread[] parallelThreads = this.setUpThread(syncer, 10);
         this.launchThreads(parallelThreads, false); // thanks to synchronized no more race conditions
         Thread.sleep(3000);
     }
 
+
+    @Test
+    public void sequencer() throws InterruptedException {
+        System.out.println("sequencer");
+        SyncThreads syncer = new Sequencer(); // one syncer only
+        Thread[] parallelThreads = this.setUpThread(syncer, 10);
+        this.launchThreads(parallelThreads, true); // still race condition...run it with false and observe
+        Thread.sleep(3000);
+    }
+
     @Test
     public void mutexWhyWrongCode() throws InterruptedException {
         int number = 10;
-        System.out.println("mutex");
+        System.out.println("bad mutex");
         Thread parallelThreads[] = new Thread[number];
         for(int i = 0; i < number; i++) {
             CriticalSectionMutex example = new CriticalSectionMutex();
@@ -69,6 +79,7 @@ public class SyncVariants {
         }
         this.launchThreads(parallelThreads, false);
         Thread.sleep(3000);
+        System.err.println("all threads entered critical section simultaneously. Why?");
     }
 
     @Test
