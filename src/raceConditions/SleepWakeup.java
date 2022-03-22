@@ -1,4 +1,4 @@
-package raceCondition;
+package raceConditions;
 
 import java.util.ArrayList;
 import java.util.List;

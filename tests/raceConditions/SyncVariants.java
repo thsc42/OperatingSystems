@@ -1,6 +1,7 @@
-package raceCondition;
+package raceConditions;
 
 import org.junit.Test;
+import raceConditions.*;
 
 public class SyncVariants {
     public Thread[] setUpThread(SyncThreads mutex, int number) {

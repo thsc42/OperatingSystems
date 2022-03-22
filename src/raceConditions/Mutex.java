@@ -1,4 +1,4 @@
-package raceCondition;
+package raceConditions;
 
 /**
  * Only one thread can enter critical section. Next thread is chosen by change afterwards.

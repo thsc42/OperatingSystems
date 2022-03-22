@@ -1,4 +1,4 @@
-package raceCondition;
+package raceConditions;
 
 public class CriticalSectionExample implements Runnable {
     private final SyncThreads sync;

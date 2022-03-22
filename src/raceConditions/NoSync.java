@@ -1,4 +1,4 @@
-package raceCondition;
+package raceConditions;
 
 public class NoSync extends SyncVariant {
     @Override

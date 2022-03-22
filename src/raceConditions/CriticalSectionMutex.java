@@ -1,4 +1,4 @@
-package raceCondition;
+package raceConditions;
 
 public class CriticalSectionMutex implements Runnable {
     private long sharedNumber;

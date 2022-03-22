@@ -1,4 +1,4 @@
-package raceCondition;
+package raceConditions;
 
 public class Spinlock extends SyncVariant {
     private long idInCriticalSection = NO_ID;
